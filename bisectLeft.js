@@ -60,7 +60,7 @@ var searchRange = function(nums, target) {
 // we know the only other edge case is if target is greater than all, so we just return the length
 // compare this to using mid+1, mid-1 with (neetcode way), we don't have to think about as many edge cases since in the end l=r
 
-function search(nums, n){
+function bisectLeft(nums, n){
     if(nums.length === 0){
         return 0;
     }
@@ -71,11 +71,9 @@ function search(nums, n){
     let r = nums.length-1;
     while(l<r) {
         let mid = Math.floor((l+r)/2);
-        if(n === nums[mid]){
-            return mid;
-        } else if(n > nums[mid]) {
+        if(nums[mid] < n) {
             l = mid+1;
-        } else { // n < nums[mid]
+        } else {
             r = mid;
         }
     }
