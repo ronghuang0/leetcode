@@ -16,6 +16,19 @@ class Solution:
                 l+=1
             res=max(res, r-l+1)
         return res
+
+# advanced sliding window
+# there's no need to move the left pointer multiple times. once we reach a window length we don't need to test the smaller ones.
+class Solution:
+    def maxFrequencyScore(self, nums: List[int], k: int) -> int:
+        nums.sort()
+        l=0
+        for r in range(len(nums)):
+            k-=nums[r]-nums[(r+l)//2]
+            if k<0:
+                k+=nums[(l+r+1)//2]-nums[l]
+                l+=1
+        return r-l+1
     
 # binary search
 class Solution:
