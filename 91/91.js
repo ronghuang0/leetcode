@@ -1,3 +1,4 @@
+// 91. Decode Ways
 
 // dfs
 
@@ -16,7 +17,7 @@ let decodeWays = (s)=> {
             return 1;
         }
         let res = s[i+1];
-        let cat = Number([i]+s[i+1]);
+        let cat = Number(s[i]+s[i+1]);
         if(cat <= 26) {
             res += s[i+2];
         }
