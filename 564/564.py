@@ -1,21 +1,23 @@
 # 564. Find the Closest Palindrome
 
 class Solution:
-    def nearestPalindromic(self, S):
-        K = len(S)
-        candidates = [str(10**K+1), str(10**(K-1)-1)]
-        prefix = S[:(K+1)//2]
-        P = int(prefix)
-        for start in map(str, (P-1, P, P+1)):
-            candidates.append(start + (start[:-1] if K%2 else start)[::-1])
-        
-        def delta(x):
-            return abs(int(S) - int(x))
-        
-        ans = None
-        for cand in candidates:
-            if cand != S and not cand.startswith('00'):
-                if (ans is None or delta(cand) < delta(ans) or
-                        delta(cand) == delta(ans) and int(cand) < int(ans)):
-                    ans = cand
-        return ans
+    def nearestPalindromic(self, n: str) -> str:
+        k = len(n)
+        cand = [str(10**(k-1)-1), str(10**k+1)]
+        m = (k+1)//2
+        prefix = n[:m]
+        p = [prefix, str(int(prefix)+1), str(int(prefix)-1)]
+        for v in p:
+            if k%2==0:
+                cand.append(v+v[::-1])
+            else:
+                cand.append(v+v[:-1][::-1])
+        res = float('inf')
+        currD = float('inf')
+        print(cand)
+        for c in cand:
+            d = abs(int(n)-int(c))
+            if c!=n and (d < currD or (d==currD and int(c)<int(n))):
+                res=c
+                currD=d
+        return res
