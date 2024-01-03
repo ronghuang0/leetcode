@@ -106,3 +106,31 @@ class Solution:
         if l==0:
             return -1
         return l
+    
+# separate into streak lenghts
+# based on the lengths of the 3 top streaks we can calculate the ans
+
+from itertools import groupby
+from collections import defaultdict
+
+class Solution:
+    def maximumLength(self, s: str) -> int:
+        lookup = defaultdict(list)
+
+        for v,g in groupby(s):
+            lookup[v].append(len(list(g)))
+        ans = -1
+        for k, c in lookup.items():
+            c.sort(reverse=True)
+            if len(c)>=3:
+                ans=max(ans, c[2])
+            if len(c)>=2:
+                if c[0]==c[1]:
+                    ans = max(ans, c[0]-1)
+                else:
+                    ans = max(ans, c[1])
+            if len(c)>=1:
+                ans = max(ans, c[0]-2)
+        if ans <= 0:
+            return -1
+        return ans
