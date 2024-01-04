@@ -36,4 +36,23 @@ class Solution:
                 l+=1
             ans+=l
         return ans
+    
+# prefix sum + binary search
+# for each element use bs to look for the first index where the subarray is no longer valid
+
+class Solution:
+    def countSubarrays(self, nums: List[int], k: int) -> int:
+        m = max(nums)
+        prefix = []
+        c = 0
+        for n in nums:
+            if n==m:
+                c+=1
+            prefix.append(c) 
+        ans = 0
+        for i in range(len(nums)):
+            if prefix[i]>=k:
+                j = bisect.bisect_left(prefix, prefix[i]-k+1)
+                ans+=j+1
+        return ans
                 
