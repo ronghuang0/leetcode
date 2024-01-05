@@ -1,9 +1,11 @@
 # 2962. Count Subarrays Where Max Element Appears at Least K Times
 
+from bisect import bisect
+
 # sliding window
 # adding all substrings where left is start of substring
 class Solution:
-    def countSubarrays(self, nums: List[int], k: int) -> int:
+    def countSubarrays(self, nums, k):
         m = max(nums)
         l=0
         ans=0
@@ -22,7 +24,7 @@ class Solution:
 # sliding window
 # adding all substring where right is end of substring
 class Solution:
-    def countSubarrays(self, nums: List[int], k: int) -> int:
+    def countSubarrays(self, nums, k):
         m = max(nums)
         l=0
         ans=0
@@ -41,7 +43,7 @@ class Solution:
 # for each element use bs to look for the first index where the subarray is no longer valid
 
 class Solution:
-    def countSubarrays(self, nums: List[int], k: int) -> int:
+    def countSubarrays(self, nums, k):
         m = max(nums)
         prefix = []
         c = 0

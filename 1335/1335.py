@@ -1,7 +1,8 @@
 # 1335. Minimum Difficulty of a Job Schedule
 
+from functools import cache
 class Solution:
-    def minDifficulty(self, jobDifficulty: List[int], d: int) -> int:
+    def minDifficulty(self, jobDifficulty, d):
         l = len(jobDifficulty)
         @cache
         def dfs(daysLeft, currMax, index):
