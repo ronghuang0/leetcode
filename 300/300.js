@@ -53,18 +53,17 @@ var lengthOfLIS = function(nums) {
 };
 
 // different dfs
-// array is wrong
 var lengthOfLIS = function(nums) {
+    l = nums.length
     nums[-1] = -10001;
-    let dp = new Array(nums.length).fill(new Array(nums.length));
+    let dp = Array.from(Array(l), ()=>Array(l))
     let dfs = (index, prev) => {
-        if(index === nums.length) {
+        if(index === l) {
             return 0;
         }
         if(dp[index][prev] !== undefined) {
             return dp[index][prev];
         }
-       
         let left = 0;
         if(nums[index] > nums[prev]) {
             left = 1+dfs(index+1, index);
@@ -74,48 +73,6 @@ var lengthOfLIS = function(nums) {
         return dp[index][prev];
     }
     return dfs(0, -1);
-};
-
-// dp - note this version shifts j by 1 to the right since it's starting the dp at 0 rather than -1 
-// how the fuck did this end up working? the 2d array isn't even correct lmfao
-
-var lengthOfLIS = function(nums) {
-    let dp = new Array(nums.length+1).fill(new Array(nums.length+1).fill(0));
-    nums[-1] = -100001;
-    for(let i=0; i<nums.length-1; i++) {
-        dp[nums.length][i] = 0;
-    }
-    // i - curr index,   j - prev index
-    for(let i=nums.length-1; i>=0; i--) {
-        for(let j=i-1; j>=-1; j--) {
-            let first = 0;
-            if(nums[i] > nums[j]){
-                first = dp[i+1][i+1];
-                first++;
-            }
-            let second = dp[i+1][j+1];
-            dp[i][j+1] = Math.max(first, second);
-        }
-    }
-    return dp[0][0];
-};
-
-// better dp version 
-
-var lengthOfLIS = function(nums) {
-    let dp = [];
-    dp[nums] = 10001;
-    let res = 0;
-    for(let i=nums.length-1; i>=0; i--) {
-        dp[i] = 1;
-        for(let j=i+1; j<nums.length; j++) {
-            if(nums[j] > nums[i]) {
-                dp[i] = Math.max(dp[i], 1+dp[j]);
-            }
-        }
-        res = Math.max(res, dp[i]);
-    }
-    return res;
 };
 
 // patience sort - this only needs length so we dont need to do it but id like to see the pointer implementation to get actual sequence
