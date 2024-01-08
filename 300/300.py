@@ -52,6 +52,16 @@ class Solution:
         for j in range(len(nums)):
             ans=max(ans, dfs(j))
         return ans
+
+# iterative version of above
+class Solution:
+    def lengthOfLIS(self, nums):
+        dp = [1]*len(nums)
+        for i in range(len(nums)-1, -1, -1):
+            for j in range(i+1, len(nums)):
+                if nums[i]<nums[j]:
+                    dp[i] = max(dp[i], 1+dp[j])
+        return max(dp)
     
 # patience sort
 class Solution:
