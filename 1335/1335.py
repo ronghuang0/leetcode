@@ -40,4 +40,24 @@ class Solution:
         return dfs(0, -1, d)
 
 #2d dp
-    
+from functools import cache
+class Solution:
+    def minDifficulty(self, jobDifficulty, d):
+        l = len(jobDifficulty)
+        if d > l:
+            return -1
+        @cache
+        def dfs(index, daysLeft):
+            if index == l:
+                if daysLeft == 0:
+                    return 0
+                return float('inf')
+            if daysLeft == 0:
+                return float('inf')
+            ans = float('inf')
+            biggestJob = 0
+            for i in range(index+1, l+1):
+                biggestJob = max(biggestJob, jobDifficulty[i-1])
+                ans = min(ans, biggestJob+dfs(i, daysLeft-1))
+            return ans
+        return dfs(0,d)
