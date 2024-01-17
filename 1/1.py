@@ -1,6 +1,7 @@
 # 1. Two Sum
 
 # 2 pass
+# O(n) space and time
 class Solution:
     def twoSum(self, nums, target):
         map = {}
