@@ -123,14 +123,30 @@ var searchRange = function(nums, target) {
 
 // biset left, using r = num.length to handle case of target being greater than all
 // once r is updated once it becomes left biased
-let l= 0;
-let r = nums.length;
-while(l<r) {
-    let mid = Math.floor((l+r)/2);
-    if(nums[mid] >= target) {
-        r = mid;
-    } else {
-        l = mid + 1;
+const bisectLeft2 = () =>{
+    let l= 0;
+    let r = nums.length;
+    while(l<r) {
+        let mid = Math.floor((l+r)/2);
+        if(nums[mid] >= target) {
+            r = mid;
+        } else {
+            l = mid + 1;
+        }
+    }
+    return l
+}
+
+const bisectRight = ()=>{
+    let l =0;
+    let r = nums.length-1
+    while(l<r){
+        mid = Math.ceil((l+r)/2)
+        if(nums[mid]<= target){
+            l = mid;
+        } else {
+            r = mid-1;
+        }
+        return l+1
     }
 }
-return l
