@@ -31,4 +31,33 @@ class Solution:
         m = x+d
         return [int(d),int(m)]
 
+# xor original and new results in the xor of missing and duplicate
+# we can choose any 1 bit out of the resulting xor
+# divide into two groups - 1 at that bit and 0 at that bit
+# in each group the xor of all the numbers leaves an answer
+# this is because we know our two numbers will have difference in that bit and be in separate groups and
+# every number will be in the same set as it's clone - so in each set our numbers are the only unique ones
+# O(n) time, O(1) space
+class Solution:
+    def findErrorNums(self, nums):
+        xor = 0
+        for i, num in enumerate(nums):
+            xor ^= (i+1)^num
+        bit = xor & ~(xor-1)
+        zero, one = 0, 0
+        for num in nums:
+            if (num & bit) != 0:
+                one^=num
+            else:
+                zero^=num
+        for i in range(1, len(nums)+1):
+            if (i & bit) != 0:
+                one^=i
+            else:
+                zero^=i
+        for num in nums:
+            if zero == num:
+                return [zero, one]
+        return [one, zero]
+
         
