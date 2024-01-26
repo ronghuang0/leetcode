@@ -1,5 +1,6 @@
 #269. Alien Dictionary
 
+# bfs: kahn's algorithm
 from collections import defaultdict
 class Solution:
     def alienOrder(self, words):
@@ -38,3 +39,46 @@ class Solution:
         if len(res) == len(indegree):
             return ''.join(res) + ''.join(list(letters))
         return ''
+
+
+# postorder dfs
+    
+class Solution:
+    def alienOrder(self, words):
+        adj = {}
+        for word in words:
+            for letter in word:
+                if letter not in adj:
+                    adj[letter] = []
+
+        for i in range(len(words)-1):
+            word1 = words[i]
+            word2 = words[i+1]
+            for j in range(len(word1)):
+                if j > len(word2)-1:
+                    return ''
+                if word1[j] != word2[j]:
+                    adj[word1[j]].append(word2[j])
+                    break
+        res = []
+        cycle = set()
+        visited = set()
+        def dfs(node):
+            if node in visited:
+                return True
+            if node in cycle:
+                return False
+            cycle.add(node)
+            for n in adj[node]:
+                if not dfs(n):
+                    return False
+            cycle.remove(node)
+            res.append(node)
+            visited.add(node)
+            return True
+        
+        for n in adj:
+            if not dfs(n):
+                return ''
+        res.reverse()
+        return ''.join(res)
