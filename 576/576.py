@@ -35,8 +35,8 @@ class Solution:
         prev = [[0]*(n+1) for _ in range(m+1)]
         for k in range(maxMove-1, -1, -1):
             curr = [[0]*(n+1) for _ in range(m+1)]
-            for i in range(m+1):
-                for j in range(n+1):
+            for i in range(m):
+                for j in range(n):
                     res = 0
                     neighbors = [(i+1, j), (i-1,j), (i,j+1), (i, j-1)]
                     for nr, nc in neighbors:
