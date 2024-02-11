@@ -1,4 +1,4 @@
-# 1463 Cherry Pickup II
+# 1463. Cherry Pickup II
 # O(mn^2) space and time
 from functools import cache
 class Solution:
