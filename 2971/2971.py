@@ -1,7 +1,7 @@
 # 2971. Find Polygon With the largest Perimeter
 
 class Solution:
-    def largestPerimeter(self, nums: List[int]) -> int:
+    def largestPerimeter(self, nums) -> int:
         n = len(nums)
         nums.sort()
         total = [0]*n
