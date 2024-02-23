@@ -16,16 +16,14 @@ class Solution:
                 res.add(tuple(copy))
                 return
             for j in range(n):
-                if i in rows or j in cols or (i-j) in diag1 or (i+j) in diag2:
+                if j in cols or (i-j) in diag1 or (i+j) in diag2:
                     continue
-                rows.add(i)
                 cols.add(j)
                 diag1.add(i-j)
                 diag2.add(i+j)
                 board[i][j] = 'Q'
                 dfs(i+1)
                 board[i][j] = '.'
-                rows.remove(i)
                 cols.remove(j)
                 diag1.remove(i-j)
                 diag2.remove(i+j)
