@@ -1,4 +1,4 @@
-# 3043. Find the Length of the Longet Common Prefix
+# 3043. Find the Length of the Longest Common Prefix
 
 class Solution:
     def longestCommonPrefix(self, arr1: List[int], arr2: List[int]) -> int:
