@@ -13,3 +13,37 @@ class Solution:
                 if p in prefixes:
                     res = max(res, len(p))
         return res
+    
+class Node:
+    def __init__(self, val):
+        self.isWord = val
+        self.children = {}
+class Trie:
+    def __init__(self):
+        self.head = Node(False)
+    def add(self, word):
+        curr = self.head
+        for char in word:
+            if char not in curr.children:
+                curr.children[char] = Node(False)
+            curr = curr.children[char]
+        curr.isWord = True
+    def prefix(self, word):
+        curr = self.head
+        count = 0
+        for char in word:
+            if char in curr.children:
+                count+=1
+            else:
+                break
+            curr = curr.children[char]
+        return count
+class Solution:
+    def longestCommonPrefix(self, arr1: List[int], arr2: List[int]) -> int:
+        t = Trie()
+        for a in arr1:
+            t.add(str(a))
+        res = 0
+        for b in arr2:
+            res=max(res, t.prefix(str(b)))
+        return res
