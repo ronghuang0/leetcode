@@ -1,4 +1,4 @@
-# 3164.
+# 3164. Find The Number of Good Pairs
 
 class Solution:
     def numberOfPairs(self, nums1: List[int], nums2: List[int], k: int) -> int:
