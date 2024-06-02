@@ -26,3 +26,19 @@ class Solution:
                         curr[i]-=1
                 ans=min(ans, abs(k-value(curr,r-l+1)))
         return ans
+    
+class Solution:
+    def minimumDifference(self, nums: List[int], k: int) -> int:
+        s=set() # all subarray values ending at i
+        t=set() # all subarray values
+        for num in nums:
+            temp=set()
+            for v in s:
+                temp.add(num&v)
+            s=temp
+            s.add(num)
+            t|=s
+        res=float('inf')
+        for v in t:
+            res=min(res, abs(k-v))
+        return res    
