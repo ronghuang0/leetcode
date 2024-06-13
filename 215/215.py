@@ -34,3 +34,31 @@ class Solution:
                 s=p+1
             else:
                 e=p-1
+
+# O(n) space. Not in place, but helps with repeating numbers
+# average O(n) time complexity. n+n/2+n/4+...
+# worst case O(n^2) time complexity
+
+class Solution:
+    def findKthLargest(self, nums: List[int], k: int) -> int:
+        def partition(arr):
+            pivot=arr[0]
+            left,mid,right=[],[],[]
+            for a in arr:
+                if a<pivot:
+                    left.append(a)
+                elif a>pivot:
+                    right.append(a)
+                else:
+                    mid.append(a)
+            return (left, mid, right)
+          
+        def find(arr, j):
+            l,m,r = partition(arr)
+            if j<=len(r):
+                return find(r, j)
+            if j>len(r)+len(m):
+                return find(l,j-len(r)-len(m))
+            return m[0]
+        
+        return find(nums,k)
